@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-cjs-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Rollup plugin to automatically check the exports of a library for cjs-module-lexer compatibility.",
   "author": "0no.co <hi@0no.co>",
   "scripts": {
