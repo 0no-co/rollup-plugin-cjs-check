@@ -10,9 +10,9 @@ function cjsCheck(opts = {}) {
     name: "cjs-check",
 
     async renderChunk(code, chunk) {
-      if (opts.extension !== '.js') {
+      if (!filter(chunk.fileName)) {
         return null;
-      } else if (!filter(chunk.fileName)) {
+      } else if (!/\.c?js$/g.test(chunk.fileName)) {
         return null;
       }
 
