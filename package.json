@@ -1,0 +1,49 @@
+{
+  "name": "rollup-plugin-cjs-check",
+  "version": "1.0.0",
+  "description": "Rollup plugin to automatically check the exports of a library for cjs-module-lexer compatibility.",
+  "author": "0no.co <hi@0no.co>",
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs",
+    "prepublishOnly": "run-s build"
+  },
+  "source": "./src/index.ts",
+  "main": "./dist/rollup-plugin-cjs-check",
+  "module": "./dist/rollup-plugin-cjs-check.mjs",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/rollup-plugin-cjs-check.mjs",
+      "require": "./dist/rollup-plugin-cjs-check.js",
+      "types": "./src/index.d.ts",
+      "source": "./src/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "src",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": "https://github.com/0no-co/rollup-plugin-cjs-check",
+  "bugs": {
+    "url": "https://github.com/0no-co/rollup-plugin-cjs-check/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "peerDependencies": {
+    "rollup": "^1.20.0 || ^2.0.0 || ^3.0.0"
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^5.0.2",
+    "cjs-module-lexer": "^1.2.2"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rollup": "^3.5.1"
+  }
+}
