@@ -9,15 +9,30 @@ function cjsCheck(opts = {}) {
   return {
     name: "cjs-check",
 
+    outputOptions(output) {
+      this.enabled = output.format === 'cjs' || output.format === 'umd';
+      return null;
+    },
+
     async renderChunk(code, chunk) {
-      if (!filter(chunk.fileName)) {
+      if (!this.enabled) {
         return null;
-      } else if (!/\.c?js$/g.test(chunk.fileName)) {
+      } else if (!filter(chunk.fileName)) {
+        return null;
+      } else if (!chunk.exports || !chunk.exports.length) {
         return null;
       }
 
       await init()
-      const output = parse(code);
+
+      let output;
+      try {
+        output = parse(code);
+      } catch (error) {
+        this.warn(error);
+        return null;
+      }
+
       const missingReexports = [];
       const missingExports = [];
 
